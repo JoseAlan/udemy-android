@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Organizze</string>
     <string name="main_texto_titulo">cacilds vidis litro abertis. \n Manduma pindureta</string>
+    <string name="text_criar_conta">Crie sua conta gratis</string>
+    <string name="text_criar_contasub">Junte-se a mais de meio milhao de pessoa \n e comece ja</string>
+    <string name="text_cadastro_novo">Cadastre-se</string>
+    <string name="text_cadastro_existente">Ja tenho conta</string>
 </resources>
