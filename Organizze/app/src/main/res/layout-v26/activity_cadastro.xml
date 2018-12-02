@@ -31,15 +31,13 @@
         android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_person_grey_24dp"
-        android:drawableLeft="@drawable/ic_person_grey_24dp"
         android:drawablePadding="10dp"
         android:hint="@string/activity_cadastro_nome"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@id/cadastro_editText_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_cadastro_title"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@id/activity_cadastro_title" />
 
     <EditText
         android:id="@+id/cadastro_editText_email"
@@ -48,15 +46,13 @@
         android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_email_grey_24dp"
-        android:drawableLeft="@drawable/ic_email_grey_24dp"
         android:drawablePadding="10dp"
         android:hint="@string/activity_cadastro_email"
         android:inputType="textEmailSubject"
         app:layout_constraintBottom_toTopOf="@id/cadastro_editText_password"
         app:layout_constraintEnd_toEndOf="@+id/cadastro_editText_name"
         app:layout_constraintStart_toStartOf="@+id/cadastro_editText_name"
-        app:layout_constraintTop_toBottomOf="@id/cadastro_editText_name"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@id/cadastro_editText_name" />
 
     <EditText
         android:id="@+id/cadastro_editText_password"
@@ -64,15 +60,13 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_lock_grey_24dp"
-        android:drawableLeft="@drawable/ic_lock_grey_24dp"
         android:drawablePadding="10dp"
         android:hint="@string/activity_cadastro_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@id/activity_cadastro_button"
         app:layout_constraintEnd_toEndOf="@+id/cadastro_editText_name"
         app:layout_constraintStart_toStartOf="@+id/cadastro_editText_name"
-        app:layout_constraintTop_toBottomOf="@id/cadastro_editText_email"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@id/cadastro_editText_email" />
 
     <Button
         android:id="@+id/activity_cadastro_button"
@@ -97,5 +91,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_cadastro_button" />
-
 </android.support.constraint.ConstraintLayout>
