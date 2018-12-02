@@ -5,4 +5,9 @@
     <string name="text_criar_contasub">Junte-se a mais de meio milhao de pessoa \n e comece ja</string>
     <string name="text_cadastro_novo">Cadastre-se</string>
     <string name="text_cadastro_existente">Ja tenho conta</string>
+    <string name="activity_cadastro_nome">Nome</string>
+    <string name="activity_cadastro_email">Email</string>
+    <string name="activity_cadastro_password">Senha</string>
+    <string name="text_cadastra">Cadastrar</string>
+    <string name="text_entrar">Entrar</string>
 </resources>
