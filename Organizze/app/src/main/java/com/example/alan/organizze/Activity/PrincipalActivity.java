@@ -1,5 +1,6 @@
 package com.example.alan.organizze.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,10 +30,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
     public void adicionaReceita (View view){
-
+            startActivity(new Intent(this, ReceitasActivity.class));
     }
 
     public void adicionaDespesa(View view){
+        startActivity(new Intent(this, DespesasActivity.class ));
 
     }
 
