@@ -9,4 +9,14 @@ public class DateUtil {
         String dataString = simpleDateFormat.format(date);
         return dataString;
     }
+
+    public static String mesAnoEscolhido(String data){
+        String dataRetorno [] = data.split("/");
+        String dia = dataRetorno[0];
+        String mes = dataRetorno[1];
+        String ano = dataRetorno[2];
+
+        String mesAno = mes + ano;
+        return mesAno;
+    }
 }

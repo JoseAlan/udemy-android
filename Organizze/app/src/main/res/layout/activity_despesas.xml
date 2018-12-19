@@ -44,8 +44,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Ex: Salario"
-        android:inputType="date"
+        android:hint="Ex: Categoria"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/despesa_data" />
@@ -55,8 +55,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Ex: Salario Mensal"
-        android:inputType="date"
+        android:hint="Ex: Desc Despesa"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/despesa_categoria" />
@@ -72,7 +72,8 @@
         fab:fab_colorNormal="@color/colorPrimaryDespesa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/despesa_descricao"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintVertical_bias="1.0"
+        android:onClick="salvarDespesa"/>
 
 
 </android.support.constraint.ConstraintLayout>
