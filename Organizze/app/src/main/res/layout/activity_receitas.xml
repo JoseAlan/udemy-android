@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Ex: Salario"
-        android:inputType="date"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/receita_data" />
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Ex: Salario Mensal"
-        android:inputType="date"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/receita_categoria" />
@@ -70,6 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:onClick="salvarReceita"
         app:layout_constraintTop_toBottomOf="@id/receita_descricao"
         app:layout_constraintVertical_bias="1.0"
         fab:fab_colorNormal="@color/colorPrimaryReceita" />
