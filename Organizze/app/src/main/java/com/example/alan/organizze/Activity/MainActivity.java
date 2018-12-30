@@ -1,13 +1,9 @@
-package com.example.alan.organizze.Activity;
+package com.example.alan.organizze.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.alan.organizze.Activity.CadastroActivity;
-import com.example.alan.organizze.Activity.LoginActivity;
 import com.example.alan.organizze.R;
 import com.example.alan.organizze.config.ConfigFirebase;
 import com.google.firebase.auth.FirebaseAuth;

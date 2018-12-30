@@ -22,4 +22,12 @@ public class ConfigFirebase {
         }
         return referencia;
     }
+
+   /* public static DatabaseReference getUserRef(){
+        if(referencia == null && auth ==null){
+            auth = FirebaseAuth.getInstance();
+            referencia = FirebaseDatabase.getInstance().getReference();
+        }
+    }
+    */
 }

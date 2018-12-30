@@ -1,4 +1,4 @@
-package com.example.alan.organizze.Activity;
+package com.example.alan.organizze.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -39,8 +39,8 @@ public class ReceitasActivity extends AppCompatActivity {
     }
 
 
-    public void salvarReceita(View view){
-        if(validarReceita()){
+    public void salvarReceita(View view) {
+        if (validarReceita()) {
             Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
             String data = campoData.getText().toString();
             movimentacao = new Movimentacao();
@@ -54,43 +54,43 @@ public class ReceitasActivity extends AppCompatActivity {
             atualizarReceita(receitaAtualizada);
 
             movimentacao.salvar(data);
-
+            finish();
 
         }
 
     }
 
-    public Boolean validarReceita(){
+    public Boolean validarReceita() {
         String textoValor = campoValor.getText().toString();
         String textoData = campoData.getText().toString();
         String textoCategoria = campoCategoria.getText().toString();
         String textoDescricao = campoDescricao.getText().toString();
 
-        if(!textoValor.isEmpty()){
-            if(!textoData.isEmpty()){
-                if(!textoCategoria.isEmpty()){
-                    if(!textoDescricao.isEmpty()){
+        if (!textoValor.isEmpty()) {
+            if (!textoData.isEmpty()) {
+                if (!textoCategoria.isEmpty()) {
+                    if (!textoDescricao.isEmpty()) {
                         return true;
-                    }else{
+                    } else {
                         Toast.makeText(ReceitasActivity.this,
                                 "Campo Descricao nao foi preenchido!!",
                                 Toast.LENGTH_LONG).show();
                         return false;
                     }
-                }else{
+                } else {
                     Toast.makeText(ReceitasActivity.this,
                             "Campo Categoria nao foi preenchido!!",
                             Toast.LENGTH_LONG).show();
                     return false;
                 }
 
-            }else{
+            } else {
                 Toast.makeText(ReceitasActivity.this,
                         "Campo Data nao foi preenchido!!",
                         Toast.LENGTH_LONG).show();
                 return false;
             }
-        }else{
+        } else {
             Toast.makeText(ReceitasActivity.this,
                     "Campo valor nao foi preenchido!!",
                     Toast.LENGTH_LONG).show();
@@ -101,28 +101,28 @@ public class ReceitasActivity extends AppCompatActivity {
 
 
     private void recuperarReceitaTotal() {
-          DatabaseReference usuarioRef = recuperarIdUsuario();
+        DatabaseReference usuarioRef = recuperarIdUsuario();
 
-          usuarioRef.addValueEventListener(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                  Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                  receitaTotal = usuario.getReceitaTotal();
-              }
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                receitaTotal = usuario.getReceitaTotal();
+            }
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-              }
-          });
+            }
+        });
     }
 
-    public void atualizarReceita (Double receitaAtualizada){
+    public void atualizarReceita(Double receitaAtualizada) {
         DatabaseReference usuarioRef = recuperarIdUsuario();
         usuarioRef.child("receitaTotal").setValue(receitaAtualizada);
     }
 
-    private DatabaseReference recuperarIdUsuario(){
+    private DatabaseReference recuperarIdUsuario() {
         String idEmail = firebaseAuth.getCurrentUser().getEmail();
         String idUsuario = Base64Util.codeficar(idEmail);
         return databaseReference.child("usuarios").child(idUsuario);

@@ -1,4 +1,4 @@
-package com.example.alan.organizze.Activity;
+package com.example.alan.organizze.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -45,70 +45,69 @@ public class DespesasActivity extends AppCompatActivity {
     }
 
 
+    public void salvarDespesa(View view) {
 
-    public void salvarDespesa(View view){
+        if (validarCamposDespesa()) {
+            String data = campoData.getText().toString();
+            Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
 
-        if(validarCamposDespesa()) {
-        String data = campoData.getText().toString();
-        Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
+            movimentacao = new Movimentacao();
+            movimentacao.setValor(valorRecuperado);
+            movimentacao.setCategoria(campoCategoria.getText().toString());
+            movimentacao.setDescricao(campoDescricao.getText().toString());
+            movimentacao.setTipo("d");
+            movimentacao.setData(data);
 
-        movimentacao = new Movimentacao();
-        movimentacao.setValor(valorRecuperado);
-        movimentacao.setCategoria(campoCategoria.getText().toString());
-        movimentacao.setDescricao(campoDescricao.getText().toString());
-        movimentacao.setTipo("d");
-        movimentacao.setData(data);
+            Double despesaAtualizada = despesaTotal + valorRecuperado;
+            atualizarDespesa(despesaAtualizada);
 
-        Double despesaAtualizada = despesaTotal + valorRecuperado;
-        atualizarDespesa(despesaAtualizada);
-
-        movimentacao.salvar(data);
-
+            movimentacao.salvar(data);
+            finish();
         }
     }
 
-    public Boolean validarCamposDespesa(){
+    public Boolean validarCamposDespesa() {
 
         String textoValor = campoValor.getText().toString();
         String textoData = campoData.getText().toString();
         String textoCategoria = campoCategoria.getText().toString();
         String textoDescricao = campoDescricao.getText().toString();
 
-        if(!textoValor.isEmpty()){
-            if(!textoData.isEmpty()){
-                if(!textoCategoria.isEmpty()){
-                    if(!textoDescricao.isEmpty()){
+        if (!textoValor.isEmpty()) {
+            if (!textoData.isEmpty()) {
+                if (!textoCategoria.isEmpty()) {
+                    if (!textoDescricao.isEmpty()) {
                         return true;
-                    }else{
+                    } else {
                         Toast.makeText(DespesasActivity.this,
                                 "Campo Descricao nao foi preenchido!!",
                                 Toast.LENGTH_LONG).show();
                         return false;
                     }
-                }else{
+                } else {
                     Toast.makeText(DespesasActivity.this,
                             "Campo Categoria nao foi preenchido!!",
                             Toast.LENGTH_LONG).show();
                     return false;
                 }
 
-            }else{
+            } else {
                 Toast.makeText(DespesasActivity.this,
                         "Campo Data nao foi preenchido!!",
                         Toast.LENGTH_LONG).show();
                 return false;
             }
-        }else{
+        } else {
             Toast.makeText(DespesasActivity.this,
                     "Campo valor nao foi preenchido!!",
                     Toast.LENGTH_LONG).show();
-                 return false;
+            return false;
         }
     }
 
     private void recuperarDespesaTotal() {
         String emailUsuario = autentic.getCurrentUser().getEmail();
-        String idUsuario  = Base64Util.codeficar(emailUsuario);
+        String idUsuario = Base64Util.codeficar(emailUsuario);
         DatabaseReference usuarioRef = dataref.child("usuarios").child(idUsuario);
 
         usuarioRef.addValueEventListener(new ValueEventListener() {
@@ -129,7 +128,7 @@ public class DespesasActivity extends AppCompatActivity {
     private void atualizarDespesa(Double despesaAtualizada) {
 
         String emailUsuario = autentic.getCurrentUser().getEmail();
-        String idUsuario  = Base64Util.codeficar(emailUsuario);
+        String idUsuario = Base64Util.codeficar(emailUsuario);
         DatabaseReference usuarioRef = dataref.child("usuarios").child(idUsuario);
 
         usuarioRef.child("despesaTotal").setValue(despesaAtualizada);
