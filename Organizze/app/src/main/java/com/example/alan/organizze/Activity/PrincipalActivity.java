@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.example.alan.organizze.R;
@@ -41,8 +43,11 @@ public class PrincipalActivity extends AppCompatActivity {
     private Double receitaTotal = 0.0, despesaTotal = 0.0, resumoSaldo = 0.0;
     private DatabaseReference usuarioRef;
     private ValueEventListener valueEventListener;
+    private ValueEventListener valueEventListenerMovimentacoes;
     private AdapterMovimentacao adapterMovimentacao;
     private List<Movimentacao> movimentacoes = new ArrayList<>();
+    private DatabaseReference movimentacaoRef;
+    private String mesAnoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +70,34 @@ public class PrincipalActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        //recyclerView.setAdapter();
-
-
+        recyclerView.setAdapter(adapterMovimentacao);
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        recuperaResumo();
+    public void recuperarMovimentacoes() {
+        String emailUsuario = firebaseAuth.getCurrentUser().getEmail();
+        String idUsuario = Base64Util.codeficar(emailUsuario);
+        movimentacaoRef = dataref.child("movimentacao").child(idUsuario).child(mesAnoSelecionado);
+        //Log.i("Dados","retorno: "+ mesAnoSelecionado);
+        valueEventListenerMovimentacoes = movimentacaoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                movimentacoes.clear();
+                for (DataSnapshot dates : dataSnapshot.getChildren()) {
+
+                    Movimentacao movimentacao = dates.getValue(Movimentacao.class);
+                   // Log.i("dadosRetorno", "dados: " + movimentacao.getDescricao());
+                      movimentacoes.add(movimentacao);
+                }
+                adapterMovimentacao.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
     }
 
     public void recuperaResumo() {
@@ -138,17 +161,35 @@ public class PrincipalActivity extends AppCompatActivity {
         CharSequence meses[] = {"Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
         calendarView.setTitleMonths(meses);
 
+        CalendarDay dataAtual = calendarView.getCurrentDate();
+        String mesSelecionado = String.format("%02d", (dataAtual.getMonth() + 1));
+        mesAnoSelecionado = String.valueOf(mesSelecionado + "" + dataAtual.getYear());
+
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
+                String mesSelecionado = String.format("%02d", (calendarDay.getMonth() + 1));
+                mesAnoSelecionado = String.valueOf(mesSelecionado + "" + calendarDay.getYear());
 
+                movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
+                recuperarMovimentacoes();
+                // Log.i("dados", "dados" + mesAnoSelecionado);
             }
         });
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        recuperaResumo();
+        recuperarMovimentacoes();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         usuarioRef.removeEventListener(valueEventListener);
+        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
     }
 }
